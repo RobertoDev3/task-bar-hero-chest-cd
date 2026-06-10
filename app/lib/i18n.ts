@@ -14,7 +14,7 @@ export function getIntlLocale(locale: Locale) {
 export const dictionaries = {
   en: {
     metadata: {
-      title: 'Task Bar Hero Chest CD',
+      title: 'Task Bar Hero Chest Timer',
       description: 'Chest farm route cooldown tracker.',
     },
     language: {
@@ -92,7 +92,7 @@ export const dictionaries = {
   },
   pt: {
     metadata: {
-      title: 'Task Bar Hero Chest CD',
+      title: 'Task Bar Hero Chest Timer',
       description: 'Controle de rota de farm de baús com cooldown.',
     },
     language: {

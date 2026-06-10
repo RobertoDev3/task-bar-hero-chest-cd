@@ -1,28 +1,38 @@
 import { type Phase } from '../../lib/farm-data';
 import { formatTime, formatTimer } from '../../lib/farm-utils';
+import {
+  formatMessage,
+  getIntlLocale,
+  type Dictionary,
+  type Locale,
+} from '../../lib/i18n';
 import { SkullIcon } from '../svg-icon/skull-icon';
 import { cn, PixelButton, StatusBadge } from '../ui';
 
 const difficultyClasses = {
-  Normal: 'border-(--green) text-(--green)',
-  Pesadelo: 'border-[var(--purple)] text-[var(--purple)]',
-  Inferno: 'border-[var(--orange)] text-[var(--orange)]',
-  Tormento: 'border-[var(--red)] text-[var(--red)]',
+  normal: 'border-(--green) text-(--green)',
+  nightmare: 'border-[var(--purple)] text-[var(--purple)]',
+  hell: 'border-[var(--orange)] text-[var(--orange)]',
+  torment: 'border-[var(--red)] text-[var(--red)]',
 };
 
 export function PhaseCard({
+  dict,
   phase,
   unlockedAt,
   now,
+  locale,
   isReady,
   farmCount,
   onMarkDone,
   onClearPhase,
   onToggleHidden,
 }: {
+  dict: Dictionary;
   phase: Phase;
   unlockedAt: number;
   now: number;
+  locale: Locale;
   isReady: boolean;
   farmCount: number;
   onMarkDone: (phase: Phase) => void;
@@ -54,7 +64,7 @@ export function PhaseCard({
               difficultyClasses[phase.difficulty],
             )}
           >
-            {phase.requirement} / {phase.difficulty}
+            {phase.requirement} / {dict.difficulties[phase.difficulty]}
           </p>
         </div>
       </div>
@@ -63,17 +73,21 @@ export function PhaseCard({
         {isLocked ? (
           <>
             <StatusBadge tone='locked'>
-              CD {formatTimer(remainingMs)}
+              {formatMessage(dict.phase.cooldown, {
+                timer: formatTimer(remainingMs),
+              })}
             </StatusBadge>
             <small className='text-(--muted)'>
-              Libera {formatTime(unlockedAt)}
+              {formatMessage(dict.phase.unlocksAt, {
+                time: formatTime(unlockedAt, getIntlLocale(locale)),
+              })}
             </small>
           </>
         ) : (
           <>
-            <StatusBadge tone='ready'>Pronta</StatusBadge>
+            <StatusBadge tone='ready'>{dict.phase.ready}</StatusBadge>
             <small className='text-(--muted)'>
-              {farmCount} baus no historico
+              {formatMessage(dict.phase.historyCount, { count: farmCount })}
             </small>
           </>
         )}
@@ -86,17 +100,17 @@ export function PhaseCard({
           variant='primary'
           onClick={() => onMarkDone(phase)}
         >
-          Feito
+          {dict.phase.done}
         </PixelButton>
         <PixelButton
           disabled={!isLocked}
           type='button'
           onClick={() => onClearPhase(phase.id)}
         >
-          Reset
+          {dict.phase.reset}
         </PixelButton>
         <PixelButton type='button' onClick={() => onToggleHidden(phase.id)}>
-          Ocultar
+          {dict.phase.hide}
         </PixelButton>
       </div>
     </article>

@@ -1,21 +1,27 @@
 import { type Phase } from '../../lib/farm-data';
+import type { Dictionary } from '../../lib/i18n';
 import { PixelButton, PixelPanel, SectionTitle } from '../ui';
 
 export function HiddenPhasesPanel({
+  dict,
   hiddenPhases,
   onToggleHidden,
 }: {
+  dict: Dictionary;
   hiddenPhases: Phase[];
   onToggleHidden: (phaseId: string) => void;
 }) {
   return (
     <PixelPanel className='p-4'>
-      <SectionTitle eyebrow='Fases ocultas' title='Nao farmadas' />
+      <SectionTitle
+        eyebrow={dict.hiddenPhases.eyebrow}
+        title={dict.hiddenPhases.title}
+      />
 
       <div className='mt-4 grid gap-2'>
         {hiddenPhases.length === 0 ? (
           <p className='border-(--line) text-(--muted) border-2 border-dashed p-3 text-sm'>
-            Todas as fases estao aparecendo na rota.
+            {dict.hiddenPhases.empty}
           </p>
         ) : (
           hiddenPhases.map(phase => (
@@ -26,7 +32,7 @@ export function HiddenPhasesPanel({
               <span className='text-(--text) font-black'>
                 {phase.zone}{' '}
                 <small className='text-(--muted) font-normal'>
-                  {phase.difficulty}
+                  {dict.difficulties[phase.difficulty]}
                 </small>
               </span>
               <PixelButton
@@ -34,7 +40,7 @@ export function HiddenPhasesPanel({
                 type='button'
                 onClick={() => onToggleHidden(phase.id)}
               >
-                Mostrar
+                {dict.hiddenPhases.show}
               </PixelButton>
             </div>
           ))

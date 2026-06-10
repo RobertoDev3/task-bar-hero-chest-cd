@@ -1,7 +1,7 @@
 export const DEFAULT_COOLDOWN_MINUTES = 15;
 export const STORAGE_KEY = 'task-bar-hero-chest-route-v1';
 
-export type Difficulty = 'Normal' | 'Pesadelo' | 'Inferno' | 'Tormento';
+export type Difficulty = 'normal' | 'nightmare' | 'hell' | 'torment';
 export type SortDirection = 'first' | 'last';
 export type Theme = 'dark' | 'light';
 
@@ -31,16 +31,16 @@ export type FarmState = {
 };
 
 export const phases: Phase[] = [
-  { id: '1-1', zone: '1-1', requirement: 'Lv1', difficulty: 'Normal' },
-  { id: '1-4', zone: '1-4', requirement: 'Lv2', difficulty: 'Normal' },
-  { id: '1-8', zone: '1-8', requirement: 'Lv3', difficulty: 'Normal' },
-  { id: '2-3', zone: '2-3', requirement: 'Lv15', difficulty: 'Normal' },
-  { id: '2-8', zone: '2-8', requirement: 'Lv20', difficulty: 'Normal' },
-  { id: '3-8', zone: '3-8', requirement: 'Lv30', difficulty: 'Normal' },
-  { id: '1-9', zone: '1-9', requirement: 'Lv40', difficulty: 'Pesadelo' },
-  { id: '3-5', zone: '3-5', requirement: 'Lv50', difficulty: 'Pesadelo' },
-  { id: '2-5', zone: '2-5', requirement: 'Lv65', difficulty: 'Inferno' },
-  { id: '1-3', zone: '1-3', requirement: 'Lv80', difficulty: 'Tormento' },
+  { id: '1-1', zone: '1-1', requirement: 'Lv1', difficulty: 'normal' },
+  { id: '1-4', zone: '1-4', requirement: 'Lv2', difficulty: 'normal' },
+  { id: '1-8', zone: '1-8', requirement: 'Lv3', difficulty: 'normal' },
+  { id: '2-3', zone: '2-3', requirement: 'Lv15', difficulty: 'normal' },
+  { id: '2-8', zone: '2-8', requirement: 'Lv20', difficulty: 'normal' },
+  { id: '3-8', zone: '3-8', requirement: 'Lv30', difficulty: 'normal' },
+  { id: '1-9', zone: '1-9', requirement: 'Lv40', difficulty: 'nightmare' },
+  { id: '3-5', zone: '3-5', requirement: 'Lv50', difficulty: 'nightmare' },
+  { id: '2-5', zone: '2-5', requirement: 'Lv65', difficulty: 'hell' },
+  { id: '1-3', zone: '1-3', requirement: 'Lv80', difficulty: 'torment' },
 ];
 
 export const initialFarmState: FarmState = {

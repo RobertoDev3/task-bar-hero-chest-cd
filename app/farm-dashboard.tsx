@@ -22,8 +22,15 @@ import {
   playUnlockSound,
   saveFarmState,
 } from './lib/farm-utils';
+import type { Dictionary, Locale } from './lib/i18n';
 
-export default function FarmDashboard() {
+export default function FarmDashboard({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) {
   const [state, setState] = useState<FarmState>(initialFarmState);
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
@@ -198,19 +205,25 @@ export default function FarmDashboard() {
         <AppHeader
           availableCount={availablePhases.length}
           cooldownCount={cooldownPhases.length}
+          dict={dict}
           historyCount={state.history.length}
           onOpenHowItWorks={() => setIsHowItWorksOpen(true)}
           onOpenSettings={toggleSettings}
         />
 
         {isHowItWorksOpen ? (
-          <HowItWorksModal onClose={() => setIsHowItWorksOpen(false)} />
+          <HowItWorksModal
+            dict={dict}
+            onClose={() => setIsHowItWorksOpen(false)}
+          />
         ) : null}
 
         {isConfigOpen ? (
           <SettingsPanel
             cooldownMinutes={state.cooldownMinutes}
+            dict={dict}
             draftCooldownMinutes={draftCooldownMinutes}
+            locale={locale}
             muted={state.muted}
             theme={state.theme}
             onCancel={cancelSettings}
@@ -235,6 +248,7 @@ export default function FarmDashboard() {
           <div className='flex flex-col gap-4'>
             <NextPhasePanel
               cooldownMinutes={state.cooldownMinutes}
+              dict={dict}
               isReady={isReady}
               nextAvailable={nextAvailable}
               nextUnlock={nextUnlock}
@@ -255,7 +269,9 @@ export default function FarmDashboard() {
               {visiblePhases.map(phase => (
                 <PhaseCard
                   farmCount={phaseStats[phase.id]}
+                  dict={dict}
                   isReady={isReady}
+                  locale={locale}
                   key={phase.id}
                   now={now}
                   phase={phase}
@@ -270,13 +286,16 @@ export default function FarmDashboard() {
 
           <aside className='flex flex-col gap-4'>
             <HistoryPanel
+              dict={dict}
               history={state.history}
+              locale={locale}
               onClearHistory={() =>
                 setState(currentState => ({ ...currentState, history: [] }))
               }
               onDeleteHistoryEntry={deleteHistoryEntry}
             />
             <HiddenPhasesPanel
+              dict={dict}
               hiddenPhases={hiddenPhases}
               onToggleHidden={toggleHidden}
             />

@@ -1,9 +1,11 @@
 import { type Phase, type SortDirection } from '../../lib/farm-data';
 import { formatTimer } from '../../lib/farm-utils';
+import { formatMessage, type Dictionary } from '../../lib/i18n';
 import { PixelButton, PixelPanel } from '../ui';
 
 export function NextPhasePanel({
   cooldownMinutes,
+  dict,
   isReady,
   nextAvailable,
   nextUnlock,
@@ -14,6 +16,7 @@ export function NextPhasePanel({
   onToggleSort,
 }: {
   cooldownMinutes: number;
+  dict: Dictionary;
   isReady: boolean;
   nextAvailable?: Phase;
   nextUnlock?: Phase;
@@ -29,22 +32,25 @@ export function NextPhasePanel({
         <div className='flex items-center gap-10'>
           <div className='min-w-0'>
             <p className='text-(--yellow) text-[0.72rem] font-black uppercase'>
-              Proxima fase sugerida
+              {dict.nextPhase.eyebrow}
             </p>
             {nextAvailable ? (
               <h2 className='text-(--green) mt-1 text-3xl font-black leading-none'>
                 {nextAvailable.zone}{' '}
                 <span className='text-(--muted) text-sm'>
-                  {nextAvailable.difficulty}
+                  {dict.difficulties[nextAvailable.difficulty]}
                 </span>
               </h2>
             ) : nextUnlock && nextUnlockAt ? (
               <h2 className='text-(--yellow) mt-1 text-2xl font-black leading-none'>
-                {nextUnlock.zone} em {formatTimer(nextUnlockAt - now)}
+                {formatMessage(dict.nextPhase.unlocksIn, {
+                  zone: nextUnlock.zone,
+                  timer: formatTimer(nextUnlockAt - now),
+                })}
               </h2>
             ) : (
               <h2 className='text-(--muted) mt-1 text-2xl font-black leading-none'>
-                Nenhuma fase visivel
+                {dict.nextPhase.noVisibleStages}
               </h2>
             )}
           </div>
@@ -57,19 +63,21 @@ export function NextPhasePanel({
               variant='primary'
               onClick={() => onMarkDone(nextAvailable)}
             >
-              Feito
+              {dict.nextPhase.done}
             </PixelButton>
           ) : null}
         </div>
 
         <div className='flex flex-col items-center gap-3'>
           <span className='text-(--muted) text-xs font-black uppercase'>
-            CD Atual: {cooldownMinutes} min
+            {formatMessage(dict.nextPhase.currentCooldown, {
+              minutes: cooldownMinutes,
+            })}
           </span>
           <PixelButton size='sm' type='button' onClick={onToggleSort}>
             {sortDirection === 'first'
-              ? 'Ordem: inicio -> fim'
-              : 'Ordem: fim -> inicio'}
+              ? dict.nextPhase.orderFirst
+              : dict.nextPhase.orderLast}
           </PixelButton>
         </div>
       </div>

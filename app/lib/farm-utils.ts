@@ -57,8 +57,8 @@ export function formatTimer(ms: number) {
   return `${minutes}:${seconds}`;
 }
 
-export function formatTime(timestamp: number) {
-  return new Intl.DateTimeFormat('pt-BR', {
+export function formatTime(timestamp: number, locale: string) {
+  return new Intl.DateTimeFormat(locale, {
     hour: '2-digit',
     minute: '2-digit',
   }).format(timestamp);

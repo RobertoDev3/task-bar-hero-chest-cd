@@ -1,15 +1,18 @@
 import { Settings } from 'lucide-react';
+import { type Dictionary } from '../../lib/i18n';
 import { PixelButton, PixelPanel, StatTile } from '../ui';
 
 export function AppHeader({
   availableCount,
   cooldownCount,
+  dict,
   historyCount,
   onOpenHowItWorks,
   onOpenSettings,
 }: {
   availableCount: number;
   cooldownCount: number;
+  dict: Dictionary;
   historyCount: number;
   onOpenHowItWorks: () => void;
   onOpenSettings: () => void;
@@ -18,21 +21,23 @@ export function AppHeader({
     <PixelPanel className='grid gap-4 p-4 lg:grid-cols-[1fr_auto]'>
       <div>
         <p className='text-(--yellow) text-[0.72rem] font-black uppercase'>
-          Task Bar Hero
+          {dict.header.gameName}
         </p>
         <h1 className='text-(--blue) mt-1 text-3xl font-black uppercase leading-none sm:text-4xl'>
-          Chest Route CD
+          {dict.header.title}
         </h1>
       </div>
 
       <div className='grid gap-2 sm:grid-cols-2 lg:grid-cols-5'>
-        <StatTile label='Disponiveis' value={availableCount} />
-        <StatTile label='Em CD' value={cooldownCount} />
-        <StatTile label='Baus farmados' value={historyCount} />
-        <PixelButton onClick={onOpenHowItWorks}>Como funciona?</PixelButton>
+        <StatTile label={dict.header.available} value={availableCount} />
+        <StatTile label={dict.header.cooldown} value={cooldownCount} />
+        <StatTile label={dict.header.farmedChests} value={historyCount} />
+        <PixelButton onClick={onOpenHowItWorks}>
+          {dict.header.howItWorks}
+        </PixelButton>
         <PixelButton onClick={onOpenSettings}>
           <Settings aria-hidden='true' size={18} strokeWidth={2.5} />
-          Config
+          {dict.header.config}
         </PixelButton>
       </div>
     </PixelPanel>

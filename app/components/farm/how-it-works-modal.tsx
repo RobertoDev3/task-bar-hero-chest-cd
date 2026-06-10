@@ -4,9 +4,16 @@ import Image from 'next/image';
 import { Maximize2, Minimize2, X } from 'lucide-react';
 import { type MouseEvent, useState } from 'react';
 import howItWorksImage from '../../assets/como-funciona.png';
+import type { Dictionary } from '../../lib/i18n';
 import { cn, PixelButton, PixelPanel } from '../ui';
 
-export function HowItWorksModal({ onClose }: { onClose: () => void }) {
+export function HowItWorksModal({
+  dict,
+  onClose,
+}: {
+  dict: Dictionary;
+  onClose: () => void;
+}) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [zoomOrigin, setZoomOrigin] = useState('50% 50%');
 
@@ -40,17 +47,19 @@ export function HowItWorksModal({ onClose }: { onClose: () => void }) {
         <div className='flex items-center justify-between gap-3 border-b-2 border-[var(--line)] p-4'>
           <div>
             <p className='text-[0.72rem] font-black uppercase text-[var(--yellow)]'>
-              Guia rapido
+              {dict.howItWorks.eyebrow}
             </p>
             <h2 className='mt-1 text-xl font-black uppercase leading-none text-[var(--blue)]'>
-              Como funciona?
+              {dict.howItWorks.title}
             </h2>
           </div>
 
           <div className='flex items-center gap-2'>
             <PixelButton
               aria-label={
-                isFullscreen ? 'Sair da tela cheia' : 'Ver imagem em tela cheia'
+                isFullscreen
+                  ? dict.howItWorks.shrink
+                  : dict.howItWorks.expand
               }
               size='icon'
               type='button'
@@ -64,7 +73,7 @@ export function HowItWorksModal({ onClose }: { onClose: () => void }) {
               )}
             </PixelButton>
             <PixelButton
-              aria-label='Fechar guia'
+              aria-label={dict.howItWorks.close}
               size='icon'
               type='button'
               variant='ghost'
@@ -85,7 +94,7 @@ export function HowItWorksModal({ onClose }: { onClose: () => void }) {
             onMouseMove={updateZoomOrigin}
           >
             <Image
-              alt='Imagem explicando como funciona a rota de farm de baus'
+              alt={dict.howItWorks.imageAlt}
               className={cn(
                 'h-auto w-full select-none transition-transform duration-200 ease-out',
                 isFullscreen

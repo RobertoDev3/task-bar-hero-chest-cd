@@ -1,6 +1,6 @@
-import { SkullIcon } from 'lucide-react';
 import { type Phase } from '../../lib/farm-data';
 import { formatTime, formatTimer } from '../../lib/farm-utils';
+import { SkullIcon } from '../svg-icon/skull-icon';
 import { cn, PixelButton, StatusBadge } from '../ui';
 
 const difficultyClasses = {
@@ -42,7 +42,7 @@ export function PhaseCard({
             difficultyClasses[phase.difficulty],
           )}
         >
-          <SkullIcon />
+          <SkullIcon className='size-6 stroke-0' />
         </div>
         <div className='min-w-0'>
           <h3 className='text-(--text) text-2xl font-black leading-none'>

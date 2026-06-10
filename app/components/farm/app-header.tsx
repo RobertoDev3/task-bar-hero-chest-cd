@@ -5,11 +5,13 @@ export function AppHeader({
   availableCount,
   cooldownCount,
   historyCount,
+  onOpenHowItWorks,
   onOpenSettings,
 }: {
   availableCount: number;
   cooldownCount: number;
   historyCount: number;
+  onOpenHowItWorks: () => void;
   onOpenSettings: () => void;
 }) {
   return (
@@ -23,10 +25,11 @@ export function AppHeader({
         </h1>
       </div>
 
-      <div className='grid gap-2 sm:grid-cols-2 lg:grid-cols-4'>
+      <div className='grid gap-2 sm:grid-cols-2 lg:grid-cols-5'>
         <StatTile label='Disponiveis' value={availableCount} />
         <StatTile label='Em CD' value={cooldownCount} />
         <StatTile label='Baus farmados' value={historyCount} />
+        <PixelButton onClick={onOpenHowItWorks}>Como funciona?</PixelButton>
         <PixelButton onClick={onOpenSettings}>
           <Settings aria-hidden='true' size={18} strokeWidth={2.5} />
           Config

@@ -57,7 +57,7 @@ export function NextPhasePanel({
               variant='primary'
               onClick={() => onMarkDone(nextAvailable)}
             >
-              Feita
+              Feito
             </PixelButton>
           ) : null}
         </div>

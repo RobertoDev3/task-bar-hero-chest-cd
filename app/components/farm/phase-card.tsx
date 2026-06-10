@@ -86,7 +86,7 @@ export function PhaseCard({
           variant='primary'
           onClick={() => onMarkDone(phase)}
         >
-          Feita
+          Feito
         </PixelButton>
         <PixelButton
           disabled={!isLocked}

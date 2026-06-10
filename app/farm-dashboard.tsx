@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { AppHeader } from './components/farm/app-header';
 import { HiddenPhasesPanel } from './components/farm/hidden-phases-panel';
 import { HistoryPanel } from './components/farm/history-panel';
+import { HowItWorksModal } from './components/farm/how-it-works-modal';
 import { NextPhasePanel } from './components/farm/next-phase-panel';
 import { PhaseCard } from './components/farm/phase-card';
 import { SettingsPanel } from './components/farm/settings-panel';
@@ -25,6 +26,7 @@ import {
 export default function FarmDashboard() {
   const [state, setState] = useState<FarmState>(initialFarmState);
   const [isConfigOpen, setIsConfigOpen] = useState(false);
+  const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
   const [draftCooldownMinutes, setDraftCooldownMinutes] = useState(
     DEFAULT_COOLDOWN_MINUTES,
   );
@@ -197,8 +199,13 @@ export default function FarmDashboard() {
           availableCount={availablePhases.length}
           cooldownCount={cooldownPhases.length}
           historyCount={state.history.length}
+          onOpenHowItWorks={() => setIsHowItWorksOpen(true)}
           onOpenSettings={toggleSettings}
         />
+
+        {isHowItWorksOpen ? (
+          <HowItWorksModal onClose={() => setIsHowItWorksOpen(false)} />
+        ) : null}
 
         {isConfigOpen ? (
           <SettingsPanel

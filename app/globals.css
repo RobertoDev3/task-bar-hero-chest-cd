@@ -1,1 +1,114 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+:root {
+  --background: #090c10;
+  --panel: #101821;
+  --panel-2: #0c1219;
+  --line: #263849;
+  --outline: #05070a;
+  --shadow: rgba(0, 0, 0, 0.34);
+  --tile-bg: rgba(5, 9, 14, 0.72);
+  --button-bg: #121c26;
+  --button-border: #34495e;
+  --button-primary-bg: #102f19;
+  --text: #e7f2ff;
+  --muted: #8fa6ba;
+  --blue: #58b7ff;
+  --green: #65ff73;
+  --purple: #b05cff;
+  --orange: #ff8b38;
+  --red: #ff3d4f;
+  --yellow: #ffd35a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  color: var(--text);
+  font-family: 'Courier New', Consolas, monospace;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    radial-gradient(
+      circle at top left,
+      rgba(88, 183, 255, 0.12),
+      transparent 32rem
+    ),
+    var(--background);
+  background-size:
+    18px 18px,
+    18px 18px,
+    auto,
+    auto;
+  color: var(--text);
+}
+
+.theme-dark {
+  --background: #090c10;
+  --panel: #101821;
+  --panel-2: #0c1219;
+  --line: #263849;
+  --outline: #05070a;
+  --shadow: rgba(0, 0, 0, 0.34);
+  --tile-bg: rgba(5, 9, 14, 0.72);
+  --button-bg: #121c26;
+  --button-border: #34495e;
+  --button-primary-bg: #102f19;
+  --text: #e7f2ff;
+  --muted: #8fa6ba;
+  --blue: #58b7ff;
+  --green: #65ff73;
+  --purple: #b05cff;
+  --orange: #ff8b38;
+  --red: #ff3d4f;
+  --yellow: #ffd35a;
+}
+
+.theme-light {
+  --background: #eef5f7;
+  --panel: #fbfdff;
+  --panel-2: #dfeaf0;
+  --line: #8ca5b7;
+  --outline: rgba(70, 92, 110, 0.2);
+  --shadow: rgba(48, 70, 86, 0.2);
+  --tile-bg: rgba(255, 255, 255, 0.58);
+  --button-bg: #ffffff;
+  --button-border: #8ca5b7;
+  --button-primary-bg: #e8f7ec;
+  --text: #102231;
+  --muted: #526b7c;
+  --blue: #1675c8;
+  --green: #12853a;
+  --purple: #7a3ec4;
+  --orange: #c15d16;
+  --red: #c82f41;
+  --yellow: #9a6900;
+}

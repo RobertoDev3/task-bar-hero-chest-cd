@@ -1,38 +1,20 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
+import prettier from 'eslint-config-prettier/flat';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.config({
-    extends: ['next/core-web-vitals', 'next/typescript', 'prettier'],
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  prettier,
+  {
     rules: {
-      'tailwindcss/no-custom-classname': 'off',
-      'react/jsx-props-no-spreading': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/ban-ts-comment': 'warn',
-      'react/prop-types': 'off',
-      'import/no-duplicates': 'off',
+      'react-hooks/set-state-in-effect': 'off',
       'react-hooks/exhaustive-deps': 'warn',
-      'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
-      'import/prefer-default-export': 'off',
-      '@typescript-eslint/camelcase': 'off',
-      'import/no-anonymous-default-export': [
-        'warn',
-        { allowObject: true, allowArrowFunction: true },
-      ],
-      semi: ['error'],
-      quotes: ['warn', 'single', { avoidEscape: true }],
-      'prefer-arrow-callback': ['error'],
-      'prefer-template': ['error'],
     },
-  }),
-];
+  },
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
+]);
 
 export default eslintConfig;

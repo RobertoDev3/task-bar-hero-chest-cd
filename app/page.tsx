@@ -1,7 +1,5 @@
+import FarmDashboard from './farm-dashboard';
+
 export default function Home() {
-  return (
-    <main>
-      <div>Hello world!</div>
-    </main>
-  );
+  return <FarmDashboard />;
 }

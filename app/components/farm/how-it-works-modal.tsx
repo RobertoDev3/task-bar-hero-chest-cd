@@ -44,12 +44,12 @@ export function HowItWorksModal({
         )}
         onClick={event => event.stopPropagation()}
       >
-        <div className='flex items-center justify-between gap-3 border-b-2 border-[var(--line)] p-4'>
+        <div className='border-(--line) flex items-center justify-between gap-3 border-b-2 p-4'>
           <div>
-            <p className='text-[0.72rem] font-black uppercase text-[var(--yellow)]'>
+            <p className='text-(--yellow) text-[0.72rem] font-black uppercase'>
               {dict.howItWorks.eyebrow}
             </p>
-            <h2 className='mt-1 text-xl font-black uppercase leading-none text-[var(--blue)]'>
+            <h2 className='text-(--blue) mt-1 text-xl font-black uppercase leading-none'>
               {dict.howItWorks.title}
             </h2>
           </div>
@@ -57,9 +57,7 @@ export function HowItWorksModal({
           <div className='flex items-center gap-2'>
             <PixelButton
               aria-label={
-                isFullscreen
-                  ? dict.howItWorks.shrink
-                  : dict.howItWorks.expand
+                isFullscreen ? dict.howItWorks.shrink : dict.howItWorks.expand
               }
               size='icon'
               type='button'
@@ -87,7 +85,7 @@ export function HowItWorksModal({
         <div className='max-h-[calc(92vh-5rem)] overflow-auto p-3'>
           <div
             className={cn(
-              'group overflow-hidden border-2 border-[var(--line)] bg-black/30',
+              'border-(--line) group overflow-hidden border-2 bg-black/30',
               'cursor-zoom-in',
             )}
             onMouseLeave={() => setZoomOrigin('50% 50%')}
